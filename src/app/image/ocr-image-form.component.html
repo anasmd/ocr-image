@@ -1,0 +1,37 @@
+<form id= "myForm" class="form-horizontal" #form="ngForm" (ngSubmit)="submit(form.value)" multipart=true>
+
+  <div class="form-group">
+    <label for="languageInputName2" class= "col-sm-2 control-label" >Language</label>
+    <div class="col-sm-2">
+      <select name ="language" ngModel class="form-control">
+        <option *ngFor="let c of languages" [ngValue]="c.value">{{c.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputName2" class="col-sm-2 control-label">Upload Image</label>
+    <div class="col-sm-6">
+      <input type="file" accept="image/*" name="file1" id="exampleInputName2" class="form-control" ngModel required (change)= processFile($event) >
+    </div>
+  </div>
+
+<div id="TheImageContents"></div>
+
+
+
+  <button type="submit" class="btn btn-default">Check the results</button>
+
+</form>
+
+<span *ngIf="loading">Loading.........</span>
+<div *ngIf="this.results && this.results.FileParseExitCode == 1">
+  {{ this.results.ParsedText }}
+</div>
+<div *ngIf="this.results && this.results.FileParseExitCode !== 1">
+  Error in parsing
+</div>
+<!-- <div class="row">
+  <h3> Preview </h3>
+  <img src="" height="200" alt="Image preview...">
+</div> -->
